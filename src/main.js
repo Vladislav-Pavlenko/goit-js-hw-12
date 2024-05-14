@@ -10,12 +10,18 @@ const refs = {
   inputEL: document.querySelector('#image-input'),
   galleryEL: document.querySelector('#gallery'),
   gallery: document.querySelector('.gallery'),
+  loadMoreBtn: document.querySelector('.load-more'),
 };
+
+let userData = '';
 
 function onFormSubmit(event) {
   event.preventDefault();
+  refs.loadMoreBtn.classList.remove('is-visible');
+  let page = 1;
   refs.galleryEL.innerHTML = '<span class="loader"></span>';
   const searchValue = refs.inputEL.value.trim();
+  userData = searchValue;
   if (searchValue === '') {
     return iziToast.show({
       title: '⨻',
@@ -33,7 +39,7 @@ function onFormSubmit(event) {
         title: '⨻',
         titleSize: '20px',
         message:
-          '"Sorry, there are no images matching your search query. Please try again!"',
+          'Sorry, there are no images matching your search query. Please try again!',
         color: 'white',
         backgroundColor: 'red',
         position: 'topRight',
@@ -41,12 +47,20 @@ function onFormSubmit(event) {
     }
     refs.galleryEL.innerHTML = '';
     renderMarkup(data.hits, refs.galleryEL);
+    if (data.totalHits > 15) {
+      refs.loadMoreBtn.classList.add('is-visible');
+    }
     let gallery = new SimpleLightbox('#gallery a', {
       captionsData: 'alt',
       captionDelay: 250,
     });
+    refs.loadMoreBtn.addEventListener('click', () => {
+      page += 1;
+      renderMarkup(data.hits, refs.galleryEL);
+    });
     gallery.refresh();
   });
+
   refs.formEL.reset();
 }
 

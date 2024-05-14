@@ -106,6 +106,20 @@
   border-color: #ff3d00 transparent;
 }
 
+.load-more {
+  display: flex;
+  margin: 20px auto;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
