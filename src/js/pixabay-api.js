@@ -4,6 +4,10 @@ export async function fetchImage(searchValue, page) {
   axios.defaults.baseURL = 'https://pixabay.com/api/';
   const paramsString = `?key=${API_KEY}&q=${searchValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=15`;
 
-  const { data } = await axios.get(paramsString);
-  return data;
+  try {
+    const { data } = await axios.get(paramsString);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }

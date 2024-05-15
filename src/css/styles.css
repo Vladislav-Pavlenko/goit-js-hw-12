@@ -82,6 +82,11 @@
   border: 1px solid #808080;
 }
 
+#loader-js {
+  display: flex;
+  justify-content: center;
+}
+
 .loader {
   width: 48px;
   height: 48px;
