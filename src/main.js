@@ -64,7 +64,6 @@ function onLoadMoreBtnClick(event) {
   fetchImage(searchValue, page).then(data => {
     renderMarkup(data.hits, refs.galleryEL);
     const galleryEl = document.querySelector('.gallery');
-
     gallery.refresh();
     const galleryHeight = galleryEl.getBoundingClientRect().height;
     window.scrollBy({
